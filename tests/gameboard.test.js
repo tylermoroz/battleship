@@ -8,7 +8,8 @@ describe("Gameboard", () => {
   });
 
   describe("Gameboard initialization", () => {
-    test("Grid initialization", () => {
+    test("Game initialization", () => {
+      expect(gameboard.size).toBe(10);
       expect(gameboard.grid).toEqual([
         [null, null, null, null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null, null, null, null],
@@ -21,6 +22,8 @@ describe("Gameboard", () => {
         [null, null, null, null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null, null, null, null],
       ]);
+      expect(gameboard.ships).toEqual([]);
+      expect(gameboard.missedShots).toEqual([]);
     });
   });
 });
