@@ -4,11 +4,11 @@ import { Gameboard } from "../src/gameboard.js";
 describe("Gameboard", () => {
   let gameboard;
 
-  beforeEach(() => {
-    gameboard = new Gameboard(10);
-  });
-
   describe("Gameboard initialization", () => {
+    beforeEach(() => {
+      gameboard = new Gameboard(10);
+    });
+
     test("Game initialization", () => {
       expect(gameboard.size).toBe(10);
       expect(gameboard.grid).toEqual([
@@ -29,11 +29,13 @@ describe("Gameboard", () => {
   });
 
   describe("Gameboard behavior", () => {
+    let ship;
+
     beforeEach(() => {
-      const ship = new Ship(3);
+      gameboard = new Gameboard(10);
+      ship = new Ship(3);
       gameboard.placeShip(ship, [0, 0], "horizontal");
     });
-
     test("Ship placement", () => {
       expect(gameboard.grid[0][0]).toBe(ship);
       expect(gameboard.grid[0][1]).toBe(ship);

@@ -1,3 +1,5 @@
+import { Ship } from "./ship.js";
+
 export class Gameboard {
   constructor(size) {
     this.size = size;
@@ -22,5 +24,15 @@ export class Gameboard {
       }
     }
     this.ships.push(ship);
+  }
+
+  receiveAttack(coords) {
+    const [x, y] = coords;
+    const target = this.grid[x][y];
+    if (target instanceof Ship) {
+      target.hit();
+    } else {
+      this.missedShots.push(coords);
+    }
   }
 }
