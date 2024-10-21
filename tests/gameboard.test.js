@@ -26,4 +26,17 @@ describe("Gameboard", () => {
       expect(gameboard.missedShots).toEqual([]);
     });
   });
+
+  describe("Gameboard behavior", () => {
+    test("Place ship", () => {
+      const ship = { length: 3 };
+      gameboard.placeShip(ship, [0, 0], "horizontal");
+
+      expect(gameboard.grid[0][0]).toBe(ship);
+      expect(gameboard.grid[0][1]).toBe(ship);
+      expect(gameboard.grid[0][2]).toBe(ship);
+
+      expect(gameboard.ships).toEqual([ship]);
+    });
+  });
 });
