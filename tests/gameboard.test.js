@@ -29,15 +29,31 @@ describe("Gameboard", () => {
   });
 
   describe("Gameboard behavior", () => {
-    test("Place ship", () => {
+    beforeEach(() => {
       const ship = new Ship(3);
       gameboard.placeShip(ship, [0, 0], "horizontal");
+    });
 
+    test("Ship placement", () => {
       expect(gameboard.grid[0][0]).toBe(ship);
       expect(gameboard.grid[0][1]).toBe(ship);
       expect(gameboard.grid[0][2]).toBe(ship);
 
       expect(gameboard.ships).toContain(ship);
+    });
+
+    test("Successful attack", () => {
+      gameboard.receiveAttack([0, 0]);
+
+      expect(ship.timesHit).toBe(1);
+      expect(gameboard.missedShots).toEqual([]);
+    });
+
+    test("Missed attack", () => {
+      gameboard.receiveAttack([9, 9]);
+
+      expect(ship.timesHit).toBe(0);
+      expect(gameboard.missedShots).toEqual([[9, 9]]);
     });
   });
 });
