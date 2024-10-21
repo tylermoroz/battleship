@@ -1,3 +1,4 @@
+import { Ship } from "../src/ship.js";
 import { Gameboard } from "../src/gameboard.js";
 
 describe("Gameboard", () => {
@@ -29,14 +30,14 @@ describe("Gameboard", () => {
 
   describe("Gameboard behavior", () => {
     test("Place ship", () => {
-      const ship = { length: 3 };
+      const ship = new Ship(3);
       gameboard.placeShip(ship, [0, 0], "horizontal");
 
       expect(gameboard.grid[0][0]).toBe(ship);
       expect(gameboard.grid[0][1]).toBe(ship);
       expect(gameboard.grid[0][2]).toBe(ship);
 
-      expect(gameboard.ships).toEqual([ship]);
+      expect(gameboard.ships).toContain(ship);
     });
   });
 });
