@@ -31,8 +31,15 @@ export class Gameboard {
     const target = this.grid[x][y];
     if (target instanceof Ship) {
       target.hit();
+      this.sunkShip(target);
     } else {
       this.missedShots.push(coords);
+    }
+  }
+
+  sunkShip(target) {
+    if (target.sunk) {
+      this.ships.splice(target, 1);
     }
   }
 }
