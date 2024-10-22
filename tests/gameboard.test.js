@@ -36,6 +36,7 @@ describe("Gameboard", () => {
       ship = new Ship(3);
       gameboard.placeShip(ship, [0, 0], "horizontal");
     });
+
     test("Ship placement", () => {
       expect(gameboard.grid[0][0]).toBe(ship);
       expect(gameboard.grid[0][1]).toBe(ship);
@@ -56,6 +57,14 @@ describe("Gameboard", () => {
 
       expect(ship.timesHit).toBe(0);
       expect(gameboard.missedShots).toEqual([[9, 9]]);
+    });
+
+    test("Sunk ship", () => {
+      gameboard.receiveAttack([0, 0]);
+      gameboard.receiveAttack([0, 1]);
+      gameboard.receiveAttack([0, 2]);
+
+      expect(gameboard.ships).toEqual([]);
     });
   });
 });
