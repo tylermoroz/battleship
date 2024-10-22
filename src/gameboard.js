@@ -41,5 +41,15 @@ export class Gameboard {
     if (target.sunk) {
       this.ships.splice(target, 1);
     }
+
+    if (typeof alert === "undefined") {
+      global.alert = function () {
+        console.log("All allied ships have been sunk!");
+      };
+    }
+
+    if (this.ships.length === 0) {
+      alert("All allied ships have been sunk!");
+    }
   }
 }
