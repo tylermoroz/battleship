@@ -15,10 +15,16 @@ export class Gameboard {
   placeShip(ship, coords, orientation) {
     const [x, y] = coords;
     if (orientation === "horizontal") {
+      if (y + ship.length > this.size || y < 0) {
+        throw new Error("Coordinates out of horizontal bounds!");
+      }
       for (let i = 0; i < ship.length; i++) {
         this.grid[x][y + i] = ship;
       }
     } else if (orientation === "vertical") {
+      if (x + ship.length > this.size || x < 0) {
+        throw new Error("Coordinates out of vertical bounds!");
+      }
       for (let i = 0; i < ship.length; i++) {
         this.grid[x + i][y] = ship;
       }

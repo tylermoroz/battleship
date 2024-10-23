@@ -45,6 +45,18 @@ describe("Gameboard", () => {
       expect(gameboard.ships).toContain(ship);
     });
 
+    test("Out of bounds horizontally", () => {
+      expect(() => {
+        gameboard.placeShip(ship, [5, 8], "horizontal");
+      }).toThrow("Coordinates out of horizontal bounds!");
+    });
+
+    test("Out of bounds vertically", () => {
+      expect(() => {
+        gameboard.placeShip(ship, [8, 5], "vertical");
+      }).toThrow("Coordinates out of vertical bounds!");
+    });
+
     test("Successful attack", () => {
       gameboard.receiveAttack([0, 0]);
 
