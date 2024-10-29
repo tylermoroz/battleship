@@ -1,4 +1,5 @@
 import { Player } from "./player.js";
+import "./styles.css";
 
 class Game {
   constructor() {
