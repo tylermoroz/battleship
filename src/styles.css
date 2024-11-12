@@ -80,6 +80,10 @@ h2 {
   border: 2px solid rgb(0, 110, 255);
 }
 
+.miss {
+  background-color: grey;
+}
+
 .gameboard {
   width: 320px;
   height: 320px;

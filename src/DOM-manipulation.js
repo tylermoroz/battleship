@@ -6,10 +6,24 @@ const buildBoard = (boardEl, boardData) => {
     for (let c = 0; c < boardData.grid[r].length; c++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-
       boardEl.append(cell);
+      addClickListener(boardEl);
     }
   }
+};
+
+const addClickListener = (board) => {
+  const container = board;
+  const cells = container.querySelectorAll(".cell");
+
+  cells.forEach((cell) => {
+    cell.addEventListener("click", cellClick);
+  });
+};
+
+const cellClick = (event) => {
+  const cell = event.target;
+  console.log("cell clicked", cell);
 };
 
 export { playerBoard, npcBoard, buildBoard };
