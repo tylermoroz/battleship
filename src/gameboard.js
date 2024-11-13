@@ -45,7 +45,7 @@ export class Gameboard {
 
   sunkShip(target) {
     if (target.sunk) {
-      this.ships.splice(target, 1);
+      this.ships = this.ships.filter((ship) => !ship.sunk);
     }
 
     if (typeof alert === "undefined") {
