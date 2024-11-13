@@ -37,16 +37,14 @@ export class Gameboard {
     const target = this.grid[x][y];
     if (target instanceof Ship) {
       target.hit();
-      this.sunkShip(target);
+      this.sunkShip();
     } else {
       this.missedShots.push(coords);
     }
   }
 
-  sunkShip(target) {
-    if (target.sunk) {
-      this.ships = this.ships.filter((ship) => !ship.sunk);
-    }
+  sunkShip() {
+    this.ships = this.ships.filter((ship) => !ship.sunk);
 
     if (typeof alert === "undefined") {
       global.alert = function () {
