@@ -84,6 +84,10 @@ h2 {
   background-color: navy;
 }
 
+.hit {
+  background-color: red;
+}
+
 .miss {
   background-color: grey;
 }

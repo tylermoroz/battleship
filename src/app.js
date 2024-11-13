@@ -34,3 +34,5 @@ newGame.npc.gameBoard.placeShip(new Ship(2), [3, 1], "horizontal");
 console.log(newGame.user.gameBoard.grid);
 console.log(newGame.npc.gameBoard.grid);
 refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+
+export { newGame };
