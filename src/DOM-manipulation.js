@@ -28,7 +28,9 @@ const buildBoard = (boardEl, boardData) => {
       }
 
       boardEl.append(cell);
-      addClickListener(cell, r, c, boardData);
+      if (boardEl === npcBoard) {
+        addClickListener(cell, r, c, boardData);
+      }
     }
   }
 };
@@ -54,6 +56,7 @@ const addClickListener = (cell, row, col, boardData) => {
       boardData.receiveAttack([row, col]);
       addMissToBoard(row, col, boardData);
     }
+    npcTurn();
     console.log(cell);
     refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
     console.log(newGame.user.gameBoard);
@@ -67,6 +70,13 @@ const addMissToBoard = (row, col, boardData) => {
 
 const addHitToBoard = (row, col, boardData) => {
   boardData.grid[row][col] = "hit";
+};
+
+const npcTurn = () => {
+  const x = Math.floor(Math.random() * 10);
+  const y = Math.floor(Math.random() * 10);
+
+  newGame.user.gameBoard.receiveAttack([x, y]);
 };
 
 const refreshGameState = (npcData, userData) => {
