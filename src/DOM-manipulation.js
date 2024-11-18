@@ -44,10 +44,7 @@ const addClickListener = (cell, row, col, boardData) => {
     if (cell.classList.contains("miss")) {
       return;
     }
-    if (
-      cell.classList.contains("ship") ||
-      cell.classList.contains("npc-ship")
-    ) {
+    if (cell.classList.contains("npc-ship")) {
       cell.classList.add("hit");
       boardData.receiveAttack([row, col]);
       addHitToBoard(row, col, boardData);
@@ -77,6 +74,18 @@ const npcTurn = () => {
   const y = Math.floor(Math.random() * 10);
 
   newGame.user.gameBoard.receiveAttack([x, y]);
+
+  const targetCell = playerBoard.querySelector(
+    `.cell[data-row="${x}"][data-col="${y}"]`
+  );
+  // console.log(targetCell);
+  if (targetCell.classList.contains("ship")) {
+    targetCell.classList.add("hit");
+    newGame.user.gameBoard.grid[x][y] = "hit";
+  } else {
+    targetCell.classList.add("miss");
+    newGame.user.gameBoard.grid[x][y] = "miss";
+  }
 };
 
 const refreshGameState = (npcData, userData) => {
