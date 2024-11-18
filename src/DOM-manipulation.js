@@ -14,7 +14,11 @@ const buildBoard = (boardEl, boardData) => {
       cell.dataset.col = c;
 
       if (boardData.grid[r][c] instanceof Ship) {
-        cell.classList.add("ship");
+        if (boardEl === npcBoard) {
+          cell.classList.add("npc-ship");
+        } else {
+          cell.classList.add("ship");
+        }
       }
       if (boardData.grid[r][c] === "miss") {
         cell.classList.add("miss");
@@ -38,7 +42,10 @@ const addClickListener = (cell, row, col, boardData) => {
     if (cell.classList.contains("miss")) {
       return;
     }
-    if (cell.classList.contains("ship")) {
+    if (
+      cell.classList.contains("ship") ||
+      cell.classList.contains("npc-ship")
+    ) {
       cell.classList.add("hit");
       boardData.receiveAttack([row, col]);
       addHitToBoard(row, col, boardData);
