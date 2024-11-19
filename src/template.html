@@ -17,6 +17,63 @@
         <div id="player">
           <h2>Player</h2>
           <div id="player-gameboard" class="gameboard"></div>
+          <div id="place-ships-modal" class="modal">
+            <div class="modal-content">
+              <h2>Deploy Fleet</h2>
+              <div id="fleet">
+                <div>
+                  <input
+                    type="radio"
+                    name="carrier"
+                    id="carrier"
+                    value="carrier"
+                    required
+                  />
+                  <label for="carrier">Carrier (5 spaces)</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="battleship"
+                    id="battleship"
+                    value="battleship"
+                    required
+                  />
+                  <label for="battleship">Battleship (4 spaces)</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="cruiser"
+                    id="cruiser"
+                    value="cruiser"
+                    required
+                  />
+                  <label for="cruiser">Cruiser (3 spaces)</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="submarine"
+                    id="submarine"
+                    value="submarine"
+                    required
+                  />
+                  <label for="submarine">Submarine (3 spaces)</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="destroyer"
+                    id="destroyer"
+                    value="destroyer"
+                    required
+                  />
+                  <label for="destroyer">Destroyer (2 spaces)</label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="npc">
           <div id="npc-gameboard" class="gameboard"></div>

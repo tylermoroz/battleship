@@ -78,7 +78,7 @@ const npcTurn = () => {
   const targetCell = playerBoard.querySelector(
     `.cell[data-row="${x}"][data-col="${y}"]`
   );
-  // console.log(targetCell);
+
   if (targetCell.classList.contains("ship")) {
     targetCell.classList.add("hit");
     newGame.user.gameBoard.grid[x][y] = "hit";
