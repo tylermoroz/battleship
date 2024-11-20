@@ -23,10 +23,6 @@ class Game {
 const newGame = new Game();
 newGame.startGame();
 
-newGame.user.gameBoard.placeShip(new Ship(4), [4, 2], "vertical");
-newGame.user.gameBoard.placeShip(new Ship(3), [0, 0], "horizontal");
-newGame.user.gameBoard.placeShip(new Ship(2), [5, 8], "vertical");
-
 newGame.npc.gameBoard.placeShip(new Ship(4), [3, 6], "vertical");
 newGame.npc.gameBoard.placeShip(new Ship(3), [7, 2], "vertical");
 newGame.npc.gameBoard.placeShip(new Ship(2), [3, 1], "horizontal");

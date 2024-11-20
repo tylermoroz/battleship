@@ -31,6 +31,9 @@ const buildBoard = (boardEl, boardData) => {
       if (boardEl === npcBoard) {
         addClickListener(cell, r, c, boardData);
       }
+      if (boardEl === playerBoard) {
+        userFleetPlacement(cell, r, c);
+      }
     }
   }
 };
@@ -93,6 +96,72 @@ const refreshGameState = (npcData, userData) => {
   npcBoard.innerHTML = "";
   buildBoard(playerBoard, userData);
   buildBoard(npcBoard, npcData);
+};
+
+const userFleetPlacement = (cell, row, col) => {
+  const fleetRadios = document.querySelectorAll(".fleet-radios");
+
+  fleetRadios.forEach((radio) => {
+    radio.addEventListener("change", (event) => {
+      fleetRadios.forEach((btn) => {
+        if (btn !== event.target) {
+          btn.checked = false;
+        }
+      });
+
+      if (event.target.checked && event.target.value === "carrier") {
+        cell.addEventListener("click", () => {
+          newGame.user.gameBoard.placeShip(
+            new Ship(5),
+            [row, col],
+            "horizontal"
+          );
+          refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+          console.log(newGame.user.gameBoard);
+        });
+      } else if (event.target.checked && event.target.value === "battleship") {
+        cell.addEventListener("click", () => {
+          newGame.user.gameBoard.placeShip(
+            new Ship(4),
+            [row, col],
+            "horizontal"
+          );
+          refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+          console.log(newGame.user.gameBoard);
+        });
+      } else if (event.target.checked && event.target.value === "cruiser") {
+        cell.addEventListener("click", () => {
+          newGame.user.gameBoard.placeShip(
+            new Ship(3),
+            [row, col],
+            "horizontal"
+          );
+          refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+          console.log(newGame.user.gameBoard);
+        });
+      } else if (event.target.checked && event.target.value === "submarine") {
+        cell.addEventListener("click", () => {
+          newGame.user.gameBoard.placeShip(
+            new Ship(3),
+            [row, col],
+            "horizontal"
+          );
+          refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+          console.log(newGame.user.gameBoard);
+        });
+      } else if (event.target.checked && event.target.value === "destroyer") {
+        cell.addEventListener("click", () => {
+          newGame.user.gameBoard.placeShip(
+            new Ship(2),
+            [row, col],
+            "horizontal"
+          );
+          refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+          console.log(newGame.user.gameBoard);
+        });
+      }
+    });
+  });
 };
 
 export { playerBoard, npcBoard, buildBoard, refreshGameState };
