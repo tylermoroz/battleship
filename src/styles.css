@@ -97,6 +97,13 @@ h2 {
   height: 320px;
 }
 
+#fleet-elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
 footer {
   background: #f4f4f4;
   color: #0084ff;

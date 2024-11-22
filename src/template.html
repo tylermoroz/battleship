@@ -18,9 +18,9 @@
           <h2>Player</h2>
           <div id="player-gameboard" class="gameboard"></div>
           <div id="place-ships-modal" class="modal">
-            <div class="modal-content">
-              <h2>Deploy Fleet</h2>
+            <div id="fleet-elements">
               <div id="fleet">
+                <h3>Deploy Fleet</h3>
                 <div>
                   <input
                     type="radio"
@@ -75,6 +75,31 @@
                     required
                   />
                   <label for="destroyer">Destroyer (2 spaces)</label>
+                </div>
+              </div>
+              <div id="orientations">
+                <h3>Orientation</h3>
+                <div id="horizontal-option">
+                  <input
+                    type="radio"
+                    name="horizontal"
+                    id="horizontal"
+                    value="horizontal"
+                    class="ship-direction"
+                    required
+                  />
+                  <label for="horizontal">Horizontal</label>
+                </div>
+                <div id="vertical-option">
+                  <input
+                    type="radio"
+                    name="vertical"
+                    id="vertical"
+                    value="vertical"
+                    class="ship-direction"
+                    required
+                  />
+                  <label for="vertical">Vertical</label>
                 </div>
               </div>
             </div>
