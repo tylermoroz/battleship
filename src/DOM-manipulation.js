@@ -102,7 +102,7 @@ const userFleetPlacement = (cell, row, col) => {
   const fleetRadios = document.querySelectorAll(".fleet-radios");
   const orientationRadios = document.querySelectorAll(".ship-direction");
   const horizontalRadio = document.querySelector("#horizontal");
-  const verticalRadio = document.querySelector("#vertical");
+  const placeShipsModal = document.querySelector("#place-ships-modal");
 
   orientationRadios.forEach((radio) => {
     radio.addEventListener("change", (event) => {
@@ -114,6 +114,20 @@ const userFleetPlacement = (cell, row, col) => {
     });
   });
 
+  const shipTypes = {
+    carrier: 5,
+    battleship: 4,
+    cruiser: 3,
+    submarine: 3,
+    destroyer: 2,
+  };
+
+  const deployFleet = (length, orientation) => {
+    newGame.user.gameBoard.placeShip(new Ship(length), [row, col], orientation);
+    refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
+    console.log(newGame.user.gameBoard);
+  };
+
   fleetRadios.forEach((radio) => {
     radio.addEventListener("change", (event) => {
       fleetRadios.forEach((btn) => {
@@ -122,106 +136,23 @@ const userFleetPlacement = (cell, row, col) => {
         }
       });
 
-      if (event.target.checked && event.target.value === "carrier") {
-        cell.addEventListener("click", () => {
-          if (horizontalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(5),
-              [row, col],
-              "horizontal"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          } else if (verticalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(5),
-              [row, col],
-              "vertical"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          }
-        });
-      } else if (event.target.checked && event.target.value === "battleship") {
-        cell.addEventListener("click", () => {
-          if (horizontalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(4),
-              [row, col],
-              "horizontal"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          } else if (verticalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(4),
-              [row, col],
-              "vertical"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          }
-        });
-      } else if (event.target.checked && event.target.value === "cruiser") {
-        cell.addEventListener("click", () => {
-          if (horizontalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(3),
-              [row, col],
-              "horizontal"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          } else if (verticalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(3),
-              [row, col],
-              "vertical"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          }
-        });
-      } else if (event.target.checked && event.target.value === "submarine") {
-        cell.addEventListener("click", () => {
-          if (horizontalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(3),
-              [row, col],
-              "horizontal"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          } else if (verticalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(3),
-              [row, col],
-              "vertical"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          }
-        });
-      } else if (event.target.checked && event.target.value === "destroyer") {
-        cell.addEventListener("click", () => {
-          if (horizontalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(2),
-              [row, col],
-              "horizontal"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          } else if (verticalRadio.checked) {
-            newGame.user.gameBoard.placeShip(
-              new Ship(2),
-              [row, col],
-              "vertical"
-            );
-            refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-            console.log(newGame.user.gameBoard);
-          }
-        });
+      if (event.target.checked && shipTypes[event.target.value]) {
+        cell.addEventListener(
+          "click",
+          () => {
+            const orientation = horizontalRadio.checked
+              ? "horizontal"
+              : "vertical";
+            deployFleet(shipTypes[event.target.value], orientation);
+
+            event.target.disabled = true;
+
+            if (newGame.user.gameBoard.ships.length === 5) {
+              placeShipsModal.style.display = "none";
+            }
+          },
+          { once: true }
+        );
       }
     });
   });
