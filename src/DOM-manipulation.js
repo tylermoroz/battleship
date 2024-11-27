@@ -72,35 +72,31 @@ const addHitToBoard = (row, col, boardData) => {
   boardData.grid[row][col] = "hit";
 };
 
-const npcTurn = (() => {
-  const attackedCells = new Set();
+const npcTurn = () => {
+  let x;
+  let y;
 
-  return () => {
-    let x;
-    let y;
+  do {
+    x = Math.floor(Math.random() * 10);
+    y = Math.floor(Math.random() * 10);
+  } while (newGame.user.gameBoard.missedShots.has(JSON.stringify([x, y])));
 
-    do {
-      x = Math.floor(Math.random() * 10);
-      y = Math.floor(Math.random() * 10);
-    } while (attackedCells.has(`${x},${y}`));
+  newGame.user.gameBoard.missedShots.add(JSON.stringify([x, y]));
 
-    attackedCells.add(`${x},${y}`);
+  newGame.user.gameBoard.receiveAttack([x, y]);
 
-    newGame.user.gameBoard.receiveAttack([x, y]);
+  const targetCell = playerBoard.querySelector(
+    `.cell[data-row="${x}"][data-col="${y}"]`
+  );
 
-    const targetCell = playerBoard.querySelector(
-      `.cell[data-row="${x}"][data-col="${y}"]`
-    );
-
-    if (targetCell.classList.contains("ship")) {
-      targetCell.classList.add("hit");
-      newGame.user.gameBoard.grid[x][y] = "hit";
-    } else {
-      targetCell.classList.add("miss");
-      newGame.user.gameBoard.grid[x][y] = "miss";
-    }
-  };
-})();
+  if (targetCell.classList.contains("ship")) {
+    targetCell.classList.add("hit");
+    newGame.user.gameBoard.grid[x][y] = "hit";
+  } else {
+    targetCell.classList.add("miss");
+    newGame.user.gameBoard.grid[x][y] = "miss";
+  }
+};
 
 const refreshGameState = (npcData, userData) => {
   playerBoard.innerHTML = "";

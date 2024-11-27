@@ -5,7 +5,7 @@ export class Gameboard {
     this.size = size;
     this.grid = this.createGrid(size);
     this.ships = [];
-    this.missedShots = [];
+    this.missedShots = new Set();
   }
 
   createGrid(size) {
@@ -39,7 +39,7 @@ export class Gameboard {
       target.hit();
       this.sunkShip();
     } else {
-      this.missedShots.push(coords);
+      this.missedShots.add(JSON.stringify(coords));
     }
   }
 
