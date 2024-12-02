@@ -24,7 +24,7 @@ describe("Gameboard", () => {
         [null, null, null, null, null, null, null, null, null, null],
       ]);
       expect(gameboard.ships).toEqual([]);
-      expect(gameboard.missedShots).toEqual([]);
+      expect(gameboard.missedShots).toEqual(new Set());
     });
   });
 
@@ -61,14 +61,14 @@ describe("Gameboard", () => {
       gameboard.receiveAttack([0, 0]);
 
       expect(ship.timesHit).toBe(1);
-      expect(gameboard.missedShots).toEqual([]);
+      expect(gameboard.missedShots).toEqual(new Set());
     });
 
     test("Missed attack", () => {
       gameboard.receiveAttack([9, 9]);
 
       expect(ship.timesHit).toBe(0);
-      expect(gameboard.missedShots).toEqual([[9, 9]]);
+      expect([...gameboard.missedShots]).toEqual(["[9,9]"]);
     });
 
     test("Sunk ship", () => {
