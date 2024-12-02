@@ -165,4 +165,34 @@ const userFleetPlacement = (cell, row, col) => {
   });
 };
 
-export { playerBoard, npcBoard, buildBoard, refreshGameState };
+const npcPlaceFleet = () => {
+  const randomCoord = () => {
+    return Math.floor(Math.random() * 10);
+  };
+
+  const shipTypes = {
+    carrier: 5,
+    battleship: 4,
+    cruiser: 3,
+    submarine: 3,
+    destroyer: 2,
+  };
+
+  const orient = { horizontal: "horizontal", vertical: "vertical" };
+
+  const randomOrient = () => {
+    return Object.keys(orient)[
+      Math.floor(Math.random() * Object.keys(orient).length)
+    ];
+  };
+
+  for (const shipLength of Object.values(shipTypes)) {
+    newGame.npc.gameBoard.placeShip(
+      new Ship(shipLength),
+      [randomCoord(), randomCoord()],
+      randomOrient()
+    );
+  }
+};
+
+export { playerBoard, npcBoard, buildBoard, refreshGameState, npcPlaceFleet };

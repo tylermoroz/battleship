@@ -3,9 +3,9 @@ import {
   npcBoard,
   buildBoard,
   refreshGameState,
+  npcPlaceFleet,
 } from "./DOM-manipulation.js";
 import { Player } from "./player.js";
-import { Ship } from "./ship.js";
 import "./styles.css";
 
 class Game {
@@ -22,10 +22,7 @@ class Game {
 
 const newGame = new Game();
 newGame.startGame();
-
-newGame.npc.gameBoard.placeShip(new Ship(4), [3, 6], "vertical");
-newGame.npc.gameBoard.placeShip(new Ship(3), [7, 2], "vertical");
-newGame.npc.gameBoard.placeShip(new Ship(2), [3, 1], "horizontal");
+npcPlaceFleet();
 
 console.log(newGame.user.gameBoard.grid);
 console.log(newGame.npc.gameBoard.grid);
