@@ -19,6 +19,7 @@ export class Gameboard {
     );
 
     if (orientation === "horizontal") {
+      //check for out of bounds placement
       if (y + ship.length > this.size || y < 0) {
         console.error("Horizontal bounds exceeded:", {
           x,
@@ -27,16 +28,19 @@ export class Gameboard {
         });
         throw new Error("Coordinates out of horizontal bounds!");
       }
+      //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x][y + i]) {
           console.error("Overlap detected at:", { x, y: y + i });
           // throw new Error("Coordinates overlap with another ship!");
         }
       }
+      //place ship onto the grid
       for (let i = 0; i < ship.length; i++) {
         this.grid[x][y + i] = ship;
       }
     } else if (orientation === "vertical") {
+      //check for out of bounds placement
       if (x + ship.length > this.size || x < 0) {
         console.error("Vertical bounds exceeded:", {
           x,
@@ -45,16 +49,19 @@ export class Gameboard {
         });
         throw new Error("Coordinates out of vertical bounds!");
       }
+      //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x + i][y]) {
           console.error("Overlap detected at:", { x: x + i, y });
           // throw new Error("Coordinates overlap with another ship!");
         }
       }
+      //place ship onto the grid
       for (let i = 0; i < ship.length; i++) {
         this.grid[x + i][y] = ship;
       }
     }
+    //add ship to the fleet
     this.ships.push(ship);
   }
 
