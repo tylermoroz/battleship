@@ -14,16 +14,42 @@ export class Gameboard {
 
   placeShip(ship, coords, orientation) {
     const [x, y] = coords;
+    console.log(
+      `Placing ship: ${ship}, at: [${x}, ${y}], orientation: ${orientation}`
+    );
+
     if (orientation === "horizontal") {
       if (y + ship.length > this.size || y < 0) {
+        console.error("Horizontal bounds exceeded:", {
+          x,
+          y,
+          shipLength: ship.length,
+        });
         throw new Error("Coordinates out of horizontal bounds!");
+      }
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x][y + i]) {
+          console.error("Overlap detected at:", { x, y: y + i });
+          // throw new Error("Coordinates overlap with another ship!");
+        }
       }
       for (let i = 0; i < ship.length; i++) {
         this.grid[x][y + i] = ship;
       }
     } else if (orientation === "vertical") {
       if (x + ship.length > this.size || x < 0) {
+        console.error("Vertical bounds exceeded:", {
+          x,
+          y,
+          shipLength: ship.length,
+        });
         throw new Error("Coordinates out of vertical bounds!");
+      }
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x + i][y]) {
+          console.error("Overlap detected at:", { x: x + i, y });
+          // throw new Error("Coordinates overlap with another ship!");
+        }
       }
       for (let i = 0; i < ship.length; i++) {
         this.grid[x + i][y] = ship;
