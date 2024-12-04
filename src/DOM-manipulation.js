@@ -186,15 +186,33 @@ const npcPlaceFleet = () => {
     ];
   };
 
+  const grid = newGame.npc.gameBoard.grid;
+
   const isValidPlacement = (startCoords, shipLength, orientation) => {
     const [x, y] = startCoords;
 
     if (orientation === "horizontal") {
-      return y >= 0 && y + shipLength - 1 < 10;
+      if (y < 0 || y + shipLength > grid.length) {
+        return false;
+      }
+
+      for (let i = 0; i < shipLength; i++) {
+        if (grid[x][y + 1]) {
+          return false;
+        }
+      }
     } else if (orientation === "vertical") {
-      return x >= 0 && x + shipLength - 1 < 10;
+      if (x < 0 || x + shipLength > grid.length) {
+        return false;
+      }
+
+      for (let i = 0; i < shipLength; i++) {
+        if (grid[x + i][y]) {
+          return false;
+        }
+      }
     }
-    return false;
+    return true;
   };
 
   for (const shipLength of Object.values(shipTypes)) {
