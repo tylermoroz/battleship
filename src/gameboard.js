@@ -32,7 +32,7 @@ export class Gameboard {
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x][y + i]) {
           console.error("Overlap detected at:", { x, y: y + i });
-          // throw new Error("Coordinates overlap with another ship!");
+          throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid
@@ -53,7 +53,7 @@ export class Gameboard {
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x + i][y]) {
           console.error("Overlap detected at:", { x: x + i, y });
-          // throw new Error("Coordinates overlap with another ship!");
+          throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid

@@ -39,7 +39,11 @@ const buildBoard = (boardEl, boardData) => {
 };
 
 const addClickListener = (cell, row, col, boardData) => {
+  const placeShipsModal = document.querySelector("#place-ships-modal");
   cell.addEventListener("click", (event) => {
+    if (placeShipsModal.style.display !== "none") {
+      return;
+    }
     const cell = event.target;
     if (cell.classList.contains("hit")) {
       return;
