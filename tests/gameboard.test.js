@@ -57,6 +57,13 @@ describe("Gameboard", () => {
       }).toThrow("Coordinates out of vertical bounds!");
     });
 
+    test("Overlapping coordinates", () => {
+      expect(() => {
+        let ship2 = new Ship(3);
+        gameboard.placeShip(ship2, [0, 0], "vertical");
+      }).toThrow("Coordinates overlap with another ship!");
+    });
+
     test("Successful attack", () => {
       gameboard.receiveAttack([0, 0]);
 
