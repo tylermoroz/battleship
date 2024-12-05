@@ -192,12 +192,12 @@ const npcPlaceFleet = () => {
     const [x, y] = startCoords;
 
     if (orientation === "horizontal") {
-      if (y < 0 || y + shipLength > grid.length) {
+      if (y < 0 || y + shipLength > grid[0].length) {
         return false;
       }
 
       for (let i = 0; i < shipLength; i++) {
-        if (grid[x][y + 1]) {
+        if (grid[x][y + i]) {
           return false;
         }
       }
@@ -223,14 +223,14 @@ const npcPlaceFleet = () => {
       startCoords = [randomCoord(), randomCoord()];
       orientation = randomOrient();
       if (isValidPlacement(startCoords, shipLength, orientation)) {
+        newGame.npc.gameBoard.placeShip(
+          new Ship(shipLength),
+          startCoords,
+          orientation
+        );
         validPlacement = true;
       }
     }
-    newGame.npc.gameBoard.placeShip(
-      new Ship(shipLength),
-      startCoords,
-      orientation
-    );
   }
 };
 
