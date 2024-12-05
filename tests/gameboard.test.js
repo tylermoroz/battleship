@@ -78,17 +78,5 @@ describe("Gameboard", () => {
 
       expect(gameboard.ships).toEqual([]);
     });
-
-    test("Alert all ships sunk", () => {
-      global.alert = jest.fn();
-
-      gameboard.receiveAttack([0, 0]);
-      gameboard.receiveAttack([0, 1]);
-      gameboard.receiveAttack([0, 2]);
-
-      expect(global.alert).toHaveBeenCalledWith(
-        "All allied ships have been sunk!"
-      );
-    });
   });
 });

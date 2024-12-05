@@ -61,6 +61,7 @@ const addClickListener = (cell, row, col, boardData) => {
     refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
     console.log(newGame.user.gameBoard);
     console.log(newGame.npc.gameBoard);
+    endGame();
   });
 };
 
@@ -231,6 +232,14 @@ const npcPlaceFleet = () => {
         validPlacement = true;
       }
     }
+  }
+};
+
+const endGame = () => {
+  if (newGame.npc.gameBoard.ships.length === 0) {
+    console.log("Game over! All npc ships have been sunk.");
+  } else if (newGame.user.gameBoard.ships.length === 0) {
+    console.log("Game over! All user ships have been sunk!");
   }
 };
 

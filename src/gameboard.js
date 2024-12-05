@@ -78,15 +78,5 @@ export class Gameboard {
 
   sunkShip() {
     this.ships = this.ships.filter((ship) => !ship.sunk);
-
-    if (typeof alert === "undefined") {
-      global.alert = function () {
-        console.log("All allied ships have been sunk!");
-      };
-    }
-
-    if (this.ships.length === 0) {
-      alert("All allied ships have been sunk!");
-    }
   }
 }
