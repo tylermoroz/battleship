@@ -1,4 +1,5 @@
 import { Ship } from "./ship.js";
+import { displayError } from "./DOM-manipulation.js";
 
 export class Gameboard {
   constructor(size) {
@@ -26,13 +27,17 @@ export class Gameboard {
           y,
           shipLength: ship.length,
         });
-        throw new Error("Coordinates out of horizontal bounds!");
+        displayError("Coordinates out of horizontal bounds!");
+        return;
+        // throw new Error("Coordinates out of horizontal bounds!");
       }
       //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x][y + i]) {
           console.error("Overlap detected at:", { x, y: y + i });
-          throw new Error("Coordinates overlap with another ship!");
+          displayError("Coordinates overlap with another ship!");
+          return;
+          // throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid
@@ -47,13 +52,17 @@ export class Gameboard {
           y,
           shipLength: ship.length,
         });
-        throw new Error("Coordinates out of vertical bounds!");
+        displayError("Coordinates out of vertical bounds!");
+        return;
+        // throw new Error("Coordinates out of vertical bounds!");
       }
       //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
         if (this.grid[x + i][y]) {
           console.error("Overlap detected at:", { x: x + i, y });
-          throw new Error("Coordinates overlap with another ship!");
+          displayError("Coordinates overlap with another ship!");
+          return;
+          // throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid

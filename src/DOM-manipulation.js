@@ -239,6 +239,18 @@ const npcPlaceFleet = () => {
   }
 };
 
+const displayError = (message) => {
+  const errorDiv = document.getElementById("error-message");
+  const errorMessage = document.createElement("div");
+  errorMessage.className = "error";
+  errorMessage.textContent = message;
+  errorDiv.appendChild(errorMessage);
+
+  setTimeout(() => {
+    errorMessage.remove();
+  }, 3000);
+};
+
 const endGame = () => {
   if (newGame.npc.gameBoard.ships.length === 0) {
     console.log("Game over! All npc ships have been sunk.");
@@ -247,4 +259,11 @@ const endGame = () => {
   }
 };
 
-export { playerBoard, npcBoard, buildBoard, refreshGameState, npcPlaceFleet };
+export {
+  playerBoard,
+  npcBoard,
+  buildBoard,
+  refreshGameState,
+  npcPlaceFleet,
+  displayError,
+};
