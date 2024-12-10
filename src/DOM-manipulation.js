@@ -135,9 +135,15 @@ const userFleetPlacement = (cell, row, col) => {
   };
 
   const deployFleet = (length, orientation) => {
-    newGame.user.gameBoard.placeShip(new Ship(length), [row, col], orientation);
+    const success = newGame.user.gameBoard.placeShip(
+      new Ship(length),
+      [row, col],
+      orientation
+    );
+
     refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
     console.log(newGame.user.gameBoard);
+    return success;
   };
 
   fleetRadios.forEach((radio) => {
@@ -149,22 +155,45 @@ const userFleetPlacement = (cell, row, col) => {
       });
 
       if (event.target.checked && shipTypes[event.target.value]) {
-        cell.addEventListener(
-          "click",
-          () => {
-            const orientation = horizontalRadio.checked
-              ? "horizontal"
-              : "vertical";
-            deployFleet(shipTypes[event.target.value], orientation);
+        const handleCellClick = () => {
+          // const tryPlacingShip = () => {
+          const orientation = horizontalRadio.checked
+            ? "horizontal"
+            : "vertical";
+          const shipPlaced = deployFleet(
+            shipTypes[event.target.value],
+            orientation
+          );
 
+          if (shipPlaced) {
+            console.log("Ship successfully placed!");
             event.target.disabled = true;
+            cell.removeEventListener("click", handleCellClick);
+          } else {
+            console.log("Invalid placement, retrying...");
 
-            if (newGame.user.gameBoard.ships.length === 5) {
-              placeShipsModal.style.display = "none";
-            }
-          },
-          { once: true }
-        );
+            event.target.checked = false;
+
+            event.target.checked = true;
+            const simulatedClickEvent = new Event("change");
+            event.target.dispatchEvent(simulatedClickEvent);
+
+            console.log("Retrying ship placement...");
+
+            cell.addEventListener("click", handleCellClick);
+          }
+
+          if (newGame.user.gameBoard.ships.length === 5) {
+            placeShipsModal.style.display = "none";
+          }
+          // };
+
+          // if (event.target.checked) {
+          //   tryPlacingShip();
+          // }
+        };
+
+        cell.addEventListener("click", handleCellClick);
       }
     });
   });

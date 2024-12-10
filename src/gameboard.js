@@ -28,7 +28,7 @@ export class Gameboard {
           shipLength: ship.length,
         });
         displayError("Coordinates out of horizontal bounds!");
-        return;
+        return false;
         // throw new Error("Coordinates out of horizontal bounds!");
       }
       //check for overlapping coordinates
@@ -36,7 +36,7 @@ export class Gameboard {
         if (this.grid[x][y + i]) {
           console.error("Overlap detected at:", { x, y: y + i });
           displayError("Coordinates overlap with another ship!");
-          return;
+          return false;
           // throw new Error("Coordinates overlap with another ship!");
         }
       }
@@ -53,7 +53,7 @@ export class Gameboard {
           shipLength: ship.length,
         });
         displayError("Coordinates out of vertical bounds!");
-        return;
+        return false;
         // throw new Error("Coordinates out of vertical bounds!");
       }
       //check for overlapping coordinates
@@ -61,7 +61,7 @@ export class Gameboard {
         if (this.grid[x + i][y]) {
           console.error("Overlap detected at:", { x: x + i, y });
           displayError("Coordinates overlap with another ship!");
-          return;
+          return false;
           // throw new Error("Coordinates overlap with another ship!");
         }
       }
@@ -72,6 +72,7 @@ export class Gameboard {
     }
     //add ship to the fleet
     this.ships.push(ship);
+    return true;
   }
 
   receiveAttack(coords) {
