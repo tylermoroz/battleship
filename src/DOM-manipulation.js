@@ -156,7 +156,6 @@ const userFleetPlacement = (cell, row, col) => {
 
       if (event.target.checked && shipTypes[event.target.value]) {
         const handleCellClick = () => {
-          // const tryPlacingShip = () => {
           const orientation = horizontalRadio.checked
             ? "horizontal"
             : "vertical";
@@ -179,18 +178,11 @@ const userFleetPlacement = (cell, row, col) => {
             event.target.dispatchEvent(simulatedClickEvent);
 
             console.log("Retrying ship placement...");
-
-            cell.addEventListener("click", handleCellClick);
           }
 
           if (newGame.user.gameBoard.ships.length === 5) {
             placeShipsModal.style.display = "none";
           }
-          // };
-
-          // if (event.target.checked) {
-          //   tryPlacingShip();
-          // }
         };
 
         cell.addEventListener("click", handleCellClick);
