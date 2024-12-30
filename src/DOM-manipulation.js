@@ -273,10 +273,19 @@ const displayError = (message) => {
 };
 
 const endGame = () => {
+  const boards = document.querySelector(".gameboards");
+  const winnerScreen = document.querySelector("#winner-screen");
+  const winner = document.createElement("h2");
   if (newGame.npc.gameBoard.ships.length === 0) {
-    console.log("Game over! All npc ships have been sunk.");
+    boards.style.display = "none";
+    winnerScreen.style.display = "flex";
+    winner.textContent = "Player Wins!";
+    winnerScreen.appendChild(winner);
   } else if (newGame.user.gameBoard.ships.length === 0) {
-    console.log("Game over! All user ships have been sunk!");
+    boards.style.display = "none";
+    winnerScreen.style.display = "flex";
+    winner.textContent = "NPC Wins!";
+    winnerScreen.appendChild(winner);
   }
 };
 
