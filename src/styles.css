@@ -25,6 +25,9 @@ header h1 {
 
 main {
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .gameboards {
@@ -40,7 +43,7 @@ main {
 }
 
 #winner-screen {
-  background: #fff;
+  background: #ffffffea;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: none;
@@ -48,8 +51,12 @@ main {
   text-shadow: 2px 2px 4px rgba(2, 79, 124, 0.664);
   font-size: 32px;
   justify-content: center;
+  align-items: center;
   border-radius: 20px;
-  gap: 10px;
+  position: absolute;
+  height: 100%;
+  width: 400px;
+  z-index: 1000;
 }
 
 #player {
@@ -97,9 +104,9 @@ h2 {
   background-color: navy;
 }
 
-.npc-ship {
+/* .npc-ship {
   background-color: navy;
-}
+} */
 
 .hit {
   background-color: red;
