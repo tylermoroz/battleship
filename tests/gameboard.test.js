@@ -46,15 +46,37 @@ describe("Gameboard", () => {
     });
 
     test("Out of bounds horizontally", () => {
-      expect(() => {
-        gameboard.placeShip(ship, [5, 8], "horizontal");
-      }).toThrow("Coordinates out of horizontal bounds!");
+      const consoleErrorMock = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+
+      gameboard.placeShip(ship, [5, 8], "horizontal");
+
+      expect(consoleErrorMock)
+        .toHaveBeenCalledWith(`"Horizontal bounds exceeded:", {
+          ${5},
+          ${8},
+          shipLength: ${ship.length},
+        }`);
+
+      consoleErrorMock.mockRestore();
     });
 
     test("Out of bounds vertically", () => {
-      expect(() => {
-        gameboard.placeShip(ship, [8, 5], "vertical");
-      }).toThrow("Coordinates out of vertical bounds!");
+      const consoleErrorMock = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+
+      gameboard.placeShip(ship, [8, 5], "vertical");
+
+      expect(consoleErrorMock)
+        .toHaveBeenCalledWith(`"Vertical bounds exceeded:", {
+          ${8},
+          ${5},
+          shipLength: ${ship.length},
+        }`);
+
+      consoleErrorMock.mockRestore();
     });
 
     test("Overlapping coordinates", () => {
