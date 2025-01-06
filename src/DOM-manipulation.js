@@ -61,10 +61,7 @@ const addClickListener = (cell, row, col, boardData) => {
       addMissToBoard(row, col, boardData);
     }
     npcTurn();
-    console.log(cell);
     refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-    console.log(newGame.user.gameBoard);
-    console.log(newGame.npc.gameBoard);
     endGame();
   });
 };
@@ -142,7 +139,6 @@ const userFleetPlacement = (cell, row, col) => {
     );
 
     refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
-    console.log(newGame.user.gameBoard);
     return success;
   };
 
@@ -165,19 +161,14 @@ const userFleetPlacement = (cell, row, col) => {
           );
 
           if (shipPlaced) {
-            console.log("Ship successfully placed!");
             event.target.disabled = true;
             cell.removeEventListener("click", handleCellClick);
           } else {
-            console.log("Invalid placement, retrying...");
-
             event.target.checked = false;
 
             event.target.checked = true;
             const simulatedClickEvent = new Event("change");
             event.target.dispatchEvent(simulatedClickEvent);
-
-            console.log("Retrying ship placement...");
           }
 
           if (newGame.user.gameBoard.ships.length === 5) {

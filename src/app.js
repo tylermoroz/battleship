@@ -24,8 +24,6 @@ const newGame = new Game();
 newGame.startGame();
 npcPlaceFleet();
 
-console.log(newGame.user.gameBoard.grid);
-console.log(newGame.npc.gameBoard.grid);
 refreshGameState(newGame.npc.gameBoard, newGame.user.gameBoard);
 
 export { newGame };

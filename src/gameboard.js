@@ -15,9 +15,6 @@ export class Gameboard {
 
   placeShip(ship, coords, orientation) {
     const [x, y] = coords;
-    console.log(
-      `Placing ship: ${ship}, at: [${x}, ${y}], orientation: ${orientation}`
-    );
 
     if (orientation === "horizontal") {
       //check for out of bounds placement
@@ -29,7 +26,6 @@ export class Gameboard {
         });
         displayError("Coordinates out of horizontal bounds!");
         return false;
-        // throw new Error("Coordinates out of horizontal bounds!");
       }
       //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
@@ -37,7 +33,6 @@ export class Gameboard {
           console.error("Overlap detected at:", { x, y: y + i });
           displayError("Coordinates overlap with another ship!");
           return false;
-          // throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid
@@ -54,7 +49,6 @@ export class Gameboard {
         });
         displayError("Coordinates out of vertical bounds!");
         return false;
-        // throw new Error("Coordinates out of vertical bounds!");
       }
       //check for overlapping coordinates
       for (let i = 0; i < ship.length; i++) {
@@ -62,7 +56,6 @@ export class Gameboard {
           console.error("Overlap detected at:", { x: x + i, y });
           displayError("Coordinates overlap with another ship!");
           return false;
-          // throw new Error("Coordinates overlap with another ship!");
         }
       }
       //place ship onto the grid

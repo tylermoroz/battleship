@@ -52,12 +52,10 @@ describe("Gameboard", () => {
 
       gameboard.placeShip(ship, [5, 8], "horizontal");
 
-      expect(consoleErrorMock)
-        .toHaveBeenCalledWith(`"Horizontal bounds exceeded:", {
-          ${5},
-          ${8},
-          shipLength: ${ship.length},
-        }`);
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        "Horizontal bounds exceeded:",
+        { x: 5, y: 8, shipLength: 3 }
+      );
 
       consoleErrorMock.mockRestore();
     });
@@ -69,21 +67,27 @@ describe("Gameboard", () => {
 
       gameboard.placeShip(ship, [8, 5], "vertical");
 
-      expect(consoleErrorMock)
-        .toHaveBeenCalledWith(`"Vertical bounds exceeded:", {
-          ${8},
-          ${5},
-          shipLength: ${ship.length},
-        }`);
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        "Vertical bounds exceeded:",
+        { x: 8, y: 5, shipLength: 3 }
+      );
 
       consoleErrorMock.mockRestore();
     });
 
     test("Overlapping coordinates", () => {
-      expect(() => {
-        let ship2 = new Ship(3);
-        gameboard.placeShip(ship2, [0, 0], "vertical");
-      }).toThrow("Coordinates overlap with another ship!");
+      const consoleErrorMock = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+
+      gameboard.placeShip(ship, [0, 0], "vertical");
+
+      expect(consoleErrorMock).toHaveBeenCalledWith("Overlap detected at:", {
+        x: 0,
+        y: 0,
+      });
+
+      consoleErrorMock.mockRestore();
     });
 
     test("Successful attack", () => {
