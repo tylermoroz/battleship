@@ -6,7 +6,10 @@ import {
   npcPlaceFleet,
 } from "./DOM-manipulation.js";
 import { Player } from "./player.js";
-import "./styles.css";
+
+if (process.env.NODE_ENV !== "test") {
+  import("./styles.css");
+}
 
 class Game {
   constructor() {

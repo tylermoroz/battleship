@@ -1,5 +1,9 @@
 import { Player } from "../src/player.js";
 
+jest.mock("../src/DOM-manipulation.js", () => ({
+  displayError: jest.fn(),
+}));
+
 describe("Player", () => {
   let user;
   let npc;

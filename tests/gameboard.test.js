@@ -1,6 +1,10 @@
 import { Ship } from "../src/ship.js";
 import { Gameboard } from "../src/gameboard.js";
 
+jest.mock("../src/DOM-manipulation.js", () => ({
+  displayError: jest.fn(),
+}));
+
 describe("Gameboard", () => {
   let gameboard;
 
